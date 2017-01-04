@@ -26,7 +26,7 @@ struct selTitle {
 	std::string name;
 };
 
-static const char *verChar = "HBL2HBC v1.1 by FIX94";
+static const char *verChar = "HBL2HBC v1.1u1 by FIX94";
 
 static unsigned int getButtonsDown();
 static bool doIdSelect();
@@ -181,6 +181,12 @@ static bool doIdSelect()
 	{
 		//current vwii hbc title id
 		titleToBoot = 0x4c554c5a;
+		goto func_exit;
+	}
+	else if(entries == 1)
+	{
+		//no point in displaying 1 option
+		titleToBoot = selTitles[0].id;
 		goto func_exit;
 	}
 
