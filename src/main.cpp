@@ -121,11 +121,12 @@ static bool doIdSelect()
 	int flen;
 	char *cBuf;
 
-	titleToBoot=0x4F484243; //use open homebrew launcher (OHBC) instead of homebrew launcher (LULZ), set title value here so it doesn't need to get changed twice for future modifications
+	//use open homebrew launcher (OHBC) instead of homebrew launcher (LULZ)
+	//set title value here so it doesn't need to get changed twice (or more often) for future modifications
+	titleToBoot=0x4F484243; 
 	FILE *f = fopen("sd:/wiiu/apps/hbl2hbc/hbl2hbc.txt","rb"); //load the txt from the app folder instead of the sd card root
 	if(!f)
 	{
-		//current vwii hbc title id 
 		goto func_exit;
 	}
 	fseek(f,0,SEEK_END);
