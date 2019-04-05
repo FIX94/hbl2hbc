@@ -1,1 +1,4 @@
+OHBC=Open Homebrew Channel
+UNEO=USB Loader GX
+DWFA=Wiiflow
 LULZ=Homebrew Channel
