@@ -26,7 +26,7 @@ struct selTitle {
 	std::string name;
 };
 
-static const char *verChar = "HBL2HBC v1.1u1 by FIX94";
+static const char *verChar = "HBL2HBC v1.1 by FIX94"; //adjusted to what the releases page says
 
 static unsigned int getButtonsDown();
 static bool doIdSelect();
@@ -121,11 +121,11 @@ static bool doIdSelect()
 	int flen;
 	char *cBuf;
 
-	FILE *f = fopen("sd:/hbl2hbc.txt","rb");
+	titleToBoot=0x4F484243; //use open homebrew launcher (OHBC) instead of homebrew launcher (LULZ), set title value here so it doesn't need to get changed twice for future modifications
+	FILE *f = fopen("sd:/wiiu/apps/hbl2hbc/hbl2hbc.txt","rb"); //load the txt from the app folder instead of the sd card root
 	if(!f)
 	{
-		//current vwii hbc title id
-		titleToBoot = 0x4c554c5a;
+		//current vwii hbc title id 
 		goto func_exit;
 	}
 	fseek(f,0,SEEK_END);
@@ -180,7 +180,6 @@ static bool doIdSelect()
 	if(entries == 0)
 	{
 		//current vwii hbc title id
-		titleToBoot = 0x4c554c5a;
 		goto func_exit;
 	}
 	else if(entries == 1)
@@ -258,8 +257,9 @@ static bool doIdSelect()
 		{
 			OSScreenClearBuffer(0);
 			OSScreenPutFont(0, 0, verChar);
+			OSScreenPutFont(1, 1, "HOME: return to Homebrew launcher\n DPAD-UP/DPAD-DOWN: navigate\n A: launch selected entry."); //display some info about buttons because why not
 			// Starting position.
-			int gamelist_y = 1;
+			int gamelist_y = 5;
 			int i;
 			for (i = 0; i < ListMax; ++i, gamelist_y++)
 			{
